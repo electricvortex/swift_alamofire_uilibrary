@@ -9,8 +9,6 @@
 import UIKit
 
 var test: [Question] = []
-var cnt = 0
-var i: Int = 0
 
 struct Question{
     var question_itself: String
@@ -28,22 +26,19 @@ struct Question{
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var btn1: UIButton!
-    @IBOutlet weak var btn2: UIButton!
-    @IBOutlet weak var btn3: UIButton!
+    var choosen: [String] = []
+    var i: Int = 0
     
+    @IBOutlet weak var questionLabel: UILabel!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        if (sender.currentTitle == Q_test[i].answer){
-            cnt += 1
-        }
+        choosen.append(sender.currentTitle!)
         if (i < Q_test.count-1){
             i += 1
             draw()
         }
         else{
-            performSegue(withIdentifier: "second", sender: self)
+            performSegue(withIdentifier: "mainSegue", sender: self)
         }
     }
     
@@ -61,15 +56,25 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let secondController = segue.destination as! SecondViewController
-        secondController.score_cnt = cnt
+        if segue.identifier == "mainSegue" {
+            let secondViewController = segue.destination as! SecondViewController
+            secondViewController.choosen_answers = choosen
+            secondViewController.testItself = Q_test
+        }
     }
-    
+
     func draw(){
         questionLabel.text = Q_test[i].question_itself
-        btn1.setTitle(Q_test[i].options[0], for: [])
-        btn2.setTitle(Q_test[i].options[1], for: [])
-        btn3.setTitle(Q_test[i].options[2], for: [])
+        var distance = 2
+        
+        for d in Q_test[i].options {
+            let button = UIButton(frame: CGRect(x: 16, y: 7*(distance+10)+16, width: Int(UIScreen.main.bounds.size.width-32), height: 45))
+            button.backgroundColor = UIColor.blue
+            button.setTitle(d, for: UIControlState.normal)
+            button.addTarget(self, action:#selector(buttonPressed(_:)), for: .touchUpInside)
+            self.view.addSubview(button)
+            distance += 15
+        }
     }
     
 

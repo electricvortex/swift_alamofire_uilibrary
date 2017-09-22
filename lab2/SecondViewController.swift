@@ -2,21 +2,23 @@
 //  SecondViewController.swift
 //  lab2
 //
-//  Created by Sattar Salambayev on 9/5/17.
+//  Created by Sattar Salambayev on 9/22/17.
 //  Copyright © 2017 Sattar Salambayev. All rights reserved.
 //
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var score_cnt: Int!
+    var choosen_answers: [String]!
+    var testItself: [Question]!
     
-    
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        score.text = "You passed \(score_cnt!) of 3 questions"
-        // Do any additional setup after loading the view.
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,16 +26,41 @@ class SecondViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    @IBOutlet weak var score: UILabel!
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return testItself.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("TableViewCell1", owner: self, options: nil)?.first as! TableViewCell1
+        cell.yourAnswer.text = choosen_answers[indexPath.row]
+        cell.rightAnswer.text = testItself[indexPath.row].answer
+        
+        if (choosen_answers[indexPath.row] == testItself[indexPath.row].answer){
+            cell.backgroundColor = UIColor.green
+        }
+        else{
+            cell.backgroundColor = UIColor.red
+        }
+        
+        return cell
+    }
+    
+    @IBAction func goBack(_ sender: Any) {
+        performSegue(withIdentifier: "backSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backSegue" {
+            let firstViewController = segue.destination as! ViewController
+            firstViewController.choosen = []
+            firstViewController.i = 0
+        }
+    }
+    
 }
