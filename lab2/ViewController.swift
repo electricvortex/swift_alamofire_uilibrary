@@ -8,26 +8,13 @@
 
 import UIKit
 
-var test: [Question] = []
 
-struct Question{
-    var question_itself: String
-    var options: [String]
-    var answer: String
-    
-    
-    init(quest:String, opts: [String], ans:String){
-        self.question_itself = quest
-        self.options = opts
-        self.answer = ans
-        test.append(self)
-    }
-}
 
 class ViewController: UIViewController {
     
     var choosen: [String] = []
     var i: Int = 0
+    let Q_test = Quiz.init().GenerateTest()
     
     @IBOutlet weak var questionLabel: UILabel!
     
@@ -41,8 +28,6 @@ class ViewController: UIViewController {
             performSegue(withIdentifier: "mainSegue", sender: self)
         }
     }
-    
-    var Q_test: [Question] = [Question(quest: "Who is Stronger?", opts: ["Batman", "Superman", "Wonder Woman"] , ans:  "Superman"), Question(quest: "Who made Python? ", opts: ["Rossum", "Linus", "Gabe"], ans: "Rossum"), Question(quest: "God of Thunder?", opts: ["Zeus", "Jupyter", "Osiris"], ans: "Zeus")]
     
     override func viewDidLoad() {
         super.viewDidLoad()

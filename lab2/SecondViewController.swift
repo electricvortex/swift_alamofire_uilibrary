@@ -38,14 +38,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("TableViewCell1", owner: self, options: nil)?.first as! TableViewCell1
-        cell.yourAnswer.text = choosen_answers[indexPath.row]
-        cell.rightAnswer.text = testItself[indexPath.row].answer
+        cell.answer.text = choosen_answers[indexPath.row]
+        cell.question.text = testItself[indexPath.row].question_itself
         
         if (choosen_answers[indexPath.row] == testItself[indexPath.row].answer){
-            cell.backgroundColor = UIColor.green
+            cell.answer.backgroundColor = UIColor.green
         }
         else{
-            cell.backgroundColor = UIColor.red
+            cell.answer.backgroundColor = UIColor.red
         }
         
         return cell

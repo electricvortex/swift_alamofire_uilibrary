@@ -10,8 +10,7 @@ import UIKit
 
 class TableViewCell1: UITableViewCell {
 
-    @IBOutlet weak var yourAnswer: UILabel!
+    @IBOutlet weak var question: UILabel!
     
-    @IBOutlet weak var rightAnswer: UILabel!
-    
+    @IBOutlet weak var answer: UILabel!
 }
