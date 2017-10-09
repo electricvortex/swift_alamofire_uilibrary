@@ -8,13 +8,12 @@
 
 import UIKit
 
-
-
 class ViewController: UIViewController {
     
     var choosen: [String] = []
     var i: Int = 0
-    let Q_test = Quiz.init().GenerateTest()
+    var Q_test: Array<Question> = []
+    let Q = Quiz()
     
     @IBOutlet weak var questionLabel: UILabel!
     
@@ -31,8 +30,26 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        draw()
+        
+        APIManager.goForIt{
+            (data) -> Void in
+            do{
+                let Test = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as! [String : AnyObject]
+                if let arrJSON = Test["test"] as? [[String: Any]] {
+                    for item in arrJSON{
+                        self.Q_test.append(Question(quest: item["question_itself"] as! String, opts: item["options"] as! [String],
+                                                    ans: item["answer"] as! String))
+                    }
+                }
+                self.Q_test = self.Q.GenerateTest(Test: self.Q_test)
+            }
+            catch{
+                print("Shit happens")
+            }
+            defer{
+                self.draw()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

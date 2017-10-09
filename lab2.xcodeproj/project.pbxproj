@@ -16,6 +16,7 @@
 		F5B455241F5E608A007D431F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5B455221F5E608A007D431F /* Main.storyboard */; };
 		F5B455261F5E608A007D431F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5B455251F5E608A007D431F /* Assets.xcassets */; };
 		F5B455291F5E608A007D431F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5B455271F5E608A007D431F /* LaunchScreen.storyboard */; };
+		F5E7B2361F88EFB700DDDE89 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7B2351F88EFB700DDDE89 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F5B455251F5E608A007D431F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F5B455281F5E608A007D431F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5B4552A1F5E608A007D431F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5E7B2351F88EFB700DDDE89 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				F53E473D1F74E06C00AA17C7 /* TableViewCell1.swift */,
 				F53E473E1F74E06C00AA17C7 /* TableViewCell1.xib */,
 				F56F9C701F780B0B00D43B0C /* models.swift */,
+				F5E7B2351F88EFB700DDDE89 /* APIManager.swift */,
 			);
 			path = lab2;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5E7B2361F88EFB700DDDE89 /* APIManager.swift in Sources */,
 				F56F9C711F780B0B00D43B0C /* models.swift in Sources */,
 				F53E47421F75076700AA17C7 /* SecondViewController.swift in Sources */,
 				F5B455211F5E608A007D431F /* ViewController.swift in Sources */,
