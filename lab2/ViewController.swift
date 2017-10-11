@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import LTMorphingLabel
 
 class ViewController: UIViewController {
     
@@ -15,7 +17,8 @@ class ViewController: UIViewController {
     var Q_test: Array<Question> = []
     let Q = Quiz()
     
-    @IBOutlet weak var questionLabel: UILabel!
+    
+    @IBOutlet weak var questionLabel: LTMorphingLabel!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         choosen.append(sender.currentTitle!)
@@ -31,24 +34,42 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIManager.goForIt{
-            (data) -> Void in
+//        APIManager.goForIt{
+//            (data) -> Void in
+//            do{
+//                let Test = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as! [String : AnyObject]
+//                if let arrJSON = Test["test"] as? [[String: Any]] {
+//                    for item in arrJSON{
+//                        self.Q_test.append(Question(quest: item["question_itself"] as! String, opts: item["options"] as! [String],
+//                                                    ans: item["answer"] as! String))
+//                    }
+//                }
+//                self.Q_test = self.Q.GenerateTest(Test: self.Q_test)
+//            }
+//            catch{
+//                print("Shit happens")
+//            }
+//            defer{
+//                self.draw()
+//            }
+//        }
+        Alamofire.request("https://jsonblob.com/api/jsonBlob/be981f20-acc3-11e7-894a-c9a7a170b204").responseJSON { response in
             do{
-                let Test = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as! [String : AnyObject]
+                let Test = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [String : AnyObject]
                 if let arrJSON = Test["test"] as? [[String: Any]] {
                     for item in arrJSON{
                         self.Q_test.append(Question(quest: item["question_itself"] as! String, opts: item["options"] as! [String],
-                                                    ans: item["answer"] as! String))
+                                                                    ans: item["answer"] as! String))
+                            }
                     }
-                }
                 self.Q_test = self.Q.GenerateTest(Test: self.Q_test)
-            }
+                    }
             catch{
                 print("Shit happens")
-            }
+                }
             defer{
                 self.draw()
-            }
+                }
         }
     }
 

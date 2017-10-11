@@ -1,0 +1,15 @@
+PODS:
+  - Alamofire (4.5.1)
+  - LTMorphingLabel (0.5.4)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.5)
+  - LTMorphingLabel
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  LTMorphingLabel: e2db48d19486affc0ed87fb56785c5f53afe00ec
+
+PODFILE CHECKSUM: ad18ec2f80b7d2be368c138328bea9ed03fec16e
+
+COCOAPODS: 1.3.1
