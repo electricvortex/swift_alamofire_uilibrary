@@ -8,5 +8,6 @@ target 'lab2' do
   # Pods for lab2
   pod 'Alamofire', '~> 4.5'
   pod 'LTMorphingLabel'
+  pod 'JGProgressHUD'
 
 end

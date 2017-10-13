@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import LTMorphingLabel
+import JGProgressHUD
 
 class ViewController: UIViewController {
     
@@ -16,7 +17,6 @@ class ViewController: UIViewController {
     var i: Int = 0
     var Q_test: Array<Question> = []
     let Q = Quiz()
-    
     
     @IBOutlet weak var questionLabel: LTMorphingLabel!
     
@@ -27,8 +27,17 @@ class ViewController: UIViewController {
             draw()
         }
         else{
-            performSegue(withIdentifier: "mainSegue", sender: self)
+            let hud = JGProgressHUD(style: .dark)
+            hud.textLabel.text = "Loading"
+            hud.show(in: self.view)
+            hud.dismiss(afterDelay: 3.0)
+            
+            _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(timeToMoveOn), userInfo: nil, repeats: false)
         }
+    }
+    
+    @objc func timeToMoveOn(){
+        performSegue(withIdentifier: "mainSegue", sender: self)
     }
     
     override func viewDidLoad() {
